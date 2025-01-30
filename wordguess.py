@@ -12,6 +12,22 @@ def checkGuess(guess, secret):
     else:
         return "Wrong guess! Try again", False
 
+def hint(guess, secret):
+    hint = []
+    guessList = list(guess)
+    secretList = list(secret)
+    for x in range(len(secret)):
+        if guessList[x] == secretList[x]:
+            hint.append("1")
+        else:
+            hint.append("-")
+    
+    for y in range(len(secret)):
+        if hint[x] != "1":
+            if guessList[x] in secretList:
+                hint[x] == "0"
+    return "".join(hint)
+
 def guessGame():
     word = selectWord()
     maxAttempts = 5
@@ -27,6 +43,7 @@ def guessGame():
         if guess in words:
             attempts += 1
         print(f"You have ({maxAttempts - attempts} left)")
+        print(hint(guess, word))
         if attempts == maxAttempts:
             print("You're out of turns, game over!")
             break
