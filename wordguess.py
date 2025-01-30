@@ -8,16 +8,26 @@ def selectWord():
 
 def checkGuess(guess, secret):
     if guess == secret:
-        return True
+        return "You got it! Amazing!", True
     else:
-        return False
+        return "Wrong guess! Try again", False
 
 def guessGame():
     word = selectWord()
+    maxAttempts = 5
+    attempts = 0
+    win = False
+    print("Welcome to Word Guess! You have 5 turns to guess the word. Please enter your first guess:")
     guess = input()
-    while not checkGuess(guess, word):
+    while True:
+        message, win = checkGuess(guess, word)
+        print(message)
+        if win:
+            break
+        attempts += 1
+        if attempts == maxAttempts:
+            print("You're out of turns, game over!")
+            break
         guess = input()
-    return "You Win"
 if __name__ == "__main__":
-    
-    print(guessGame())
+    guessGame()
